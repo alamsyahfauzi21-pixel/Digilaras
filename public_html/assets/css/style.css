@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Poppins', sans-serif;
+
+  --color-agency-50: #fefce8;
+  --color-agency-100: #fef9c3;
+  --color-agency-500: #facc15;
+  --color-agency-600: #c53030;
+  --color-agency-800: #065f46;
+  --color-agency-900: #064e3b;
+  --color-agency-950: #022c22;
+
+  --color-accent-500: #fde047;
+  --color-accent-blue: #3b82f6;
+  --color-accent-orange: #f97316;
+
+  --color-slate-300: #fef08a;
+  --color-slate-400: #fde047;
+  --color-slate-500: #eab308;
+
+  --color-blue-400: #facc15;
+  --color-blue-500: #9b2c2c;
+  --color-blue-600: #c53030;
+
+  --shadow-glow: 0 0 20px rgba(197, 48, 48, 0.5);
+  --shadow-glow-yellow: 0 0 20px rgba(250, 204, 21, 0.5);
+  --shadow-card: 0 10px 30px -10px rgba(0,0,0,0.5);
+}
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #022c22; }
+::-webkit-scrollbar-thumb { background: #c53030; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #9b2c2c; }
+
+/* Scroll Reveal Animation Classes */
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* Floating Animation */
+@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-delayed { animation: float 7s ease-in-out infinite; animation-delay: 2s; }
+.animate-float-fast { animation: float 4s ease-in-out infinite; animation-delay: 1s; }
+
+/* Gradient Text */
+.text-gradient { background: linear-gradient(135deg, #facc15 0%, #c53030 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.text-gradient-blue { background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* Custom Animations */
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-5deg) scale(1); }
+    50% { transform: rotate(5deg) scale(1.1); }
+}
+.group:hover .icon-animate {
+    animation: wiggle 0.4s ease-in-out infinite;
+}
+
+@keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob { animation: blob 7s infinite; }
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* Animasi Chart Batang */
+@keyframes barGrow {
+    0% { transform: scaleY(0); opacity: 0; }
+    100% { transform: scaleY(1); opacity: 1; }
+}
+.animate-bar-1 { animation: barGrow 1s ease-out forwards; animation-delay: 0.2s; transform-origin: bottom; opacity: 0; }
+.animate-bar-2 { animation: barGrow 1s ease-out forwards; animation-delay: 0.4s; transform-origin: bottom; opacity: 0; }
+.animate-bar-3 { animation: barGrow 1s ease-out forwards; animation-delay: 0.6s; transform-origin: bottom; opacity: 0; }
+.animate-bar-4 { animation: barGrow 1s ease-out forwards; animation-delay: 0.8s; transform-origin: bottom; opacity: 0; }
+.animate-bar-5 { animation: barGrow 1s ease-out forwards; animation-delay: 1.0s; transform-origin: bottom; opacity: 0; }
+.animate-bar-6 { animation: barGrow 1s ease-out forwards; animation-delay: 1.2s; transform-origin: bottom; opacity: 0; }
+
+/* Instagram Gradient Ring */
+.ig-ring {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    padding: 3px;
+    border-radius: 50%;
+}
+
+/* Mockup Web Loading Animation */
+@keyframes skeletonLoad {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+.skeleton {
+    background: linear-gradient(90deg, #065f46 25%, #064e3b 50%, #065f46 75%);
+    background-size: 200% 100%;
+    animation: skeletonLoad 2s infinite linear;
+}
+
+.filter-btn.active { background-color: #facc15; color: #022c22; border-color: #facc15; }

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <!-- Bulletproof fetch setter patch to prevent Uncaught TypeError: Cannot set property fetch of #<Window> which has only a getter -->
+    <script>
+        (function() {
+            try {
+                var originalFetch = window.fetch;
+                var currentFetch = originalFetch;
+                Object.defineProperty(window, 'fetch', {
+                    configurable: true,
+                    enumerable: true,
+                    get: function() { return currentFetch; },
+                    set: function(val) { currentFetch = val; }
+                });
+            } catch (e) {
+                // Safe fallback
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikel & Insight Digital | DIGILARAS</title>
+    <meta name="description" content="Kumpulan artikel, tips, panduan, dan insight bisnis seputar SEO, pembuatan website, Google Ads, dan Social Media Management dari tim ahli DIGILARAS.">
+    <link rel="canonical" href="https://digilaras.com/artikel/">
+    <meta property="og:title" content="Artikel & Insight Digital | DIGILARAS">
+    <meta property="og:description" content="Kumpulan artikel, tips, panduan, dan insight bisnis seputar pemasaran digital dari tim ahli DIGILARAS.">
+    <meta property="og:url" content="https://digilaras.com/artikel/">
+    <meta property="og:type" content="website">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23022c22'/><path d='M30 70V30h20c15 0 25 10 25 20s-10 20-25 20H30zm10-10h10c10 0 15-5 15-10s-5-10-15-10H40v20z' fill='%23facc15'/></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="bg-agency-900 text-slate-300 antialiased overflow-x-hidden">
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <main class="pt-32 pb-24">
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16 relative">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-agency-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-agency-500 font-bold text-xs uppercase tracking-widest mb-4">
+                <i class="fa-solid fa-book-open"></i> Insight & Edukasi
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight mb-6">
+                Eksplorasi <span class="text-gradient">Strategi</span> Digital
+            </h1>
+            <p class="text-slate-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                Temukan tips praktis, panduan mendalam, dan tren terbaru seputar SEO, digital marketing, website, dan periklanan untuk melejitkan bisnis Anda.
+            </p>
+        </section>
+
+        <!-- Articles Grid Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- ARTICLES_LIST -->
+                <!-- Dynamic or pre-rendered articles will load here -->
+                <div class="col-span-full text-center py-12 text-slate-400" id="loading-indicator">
+                    <i class="fa-solid fa-circle-notch animate-spin text-3xl text-agency-500 mb-3"></i>
+                    <p class="font-medium">Memuat artikel berkualitas...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/main.js"></script>
+    <script id="article-loader">
+        // Helper to get bulletproof API URL based on environment
+        function getApiUrl(endpoint, slug = '') {
+            // Node/Vite development environment always runs on port 3000 or AI Studio container domains
+            const isNodeDev = window.location.hostname.includes('ais-dev') || 
+                              window.location.hostname.includes('ais-pre') || 
+                              window.location.port === '3000';
+            if (isNodeDev) {
+                return slug ? `/api/articles/${slug}` : '/api/articles';
+            } else {
+                // On PHP environments (production Hostinger, local XAMPP/Apache, php -S),
+                // we dynamically calculate the basePath of the subdirectory to ensure compatibility on localhost (e.g. localhost/digilaras/public_html/)
+                const pathname = window.location.pathname;
+                const index = pathname.toLowerCase().indexOf('/artikel');
+                let basePath = '';
+                if (index !== -1) {
+                    basePath = pathname.substring(0, index);
+                }
+                return slug ? `${basePath}/api.php?slug=${slug}` : `${basePath}/api.php`;
+            }
+        }
+
+        function loadArticles() {
+            const grid = document.getElementById('articles-grid');
+            const loader = document.getElementById('loading-indicator');
+            
+            if (grid) {
+                // If there are pre-rendered articles inside the grid (meaning children count is greater than 1 because of pre-rendered articles + loader)
+                if (grid.children.length > 1) {
+                    if (loader) loader.remove();
+                    return;
+                }
+
+                fetch(getApiUrl('articles'))
+                    .then(res => {
+                        if (!res.ok) throw new Error('Response not OK');
+                        return res.json();
+                    })
+                    .then(articles => {
+                        if (loader) loader.remove();
+                        if (!articles || articles.length === 0) {
+                            grid.innerHTML = `
+                                <div class="col-span-full text-center py-16 bg-agency-950/40 border border-white/5 rounded-2xl">
+                                    <i class="fa-solid fa-feather-pointed text-4xl text-agency-500/50 mb-3"></i>
+                                    <p class="text-slate-400 font-bold">Belum ada artikel yang diterbitkan.</p>
+                                </div>
+                            `;
+                            return;
+                        }
+                        
+                        grid.innerHTML = articles.map(article => `
+                            <article class="bg-agency-950/60 border border-white/10 rounded-2xl overflow-hidden hover:border-agency-500/40 group hover:shadow-card transition-all duration-300 flex flex-col h-full" id="article-${article.slug}">
+                                <div class="relative overflow-hidden aspect-video">
+                                    <img src="${article.coverImage || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600'}" alt="${article.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" referrerPolicy="no-referrer">
+                                    <span class="absolute top-4 left-4 bg-agency-600 text-white text-xs font-extrabold uppercase px-3 py-1.5 rounded-full tracking-wider z-10">
+                                        ${article.category}
+                                    </span>
+                                </div>
+                                <div class="p-6 flex flex-col flex-grow">
+                                    <div class="flex items-center gap-4 text-xs text-slate-400 mb-3 uppercase tracking-wider font-semibold">
+                                        <span><i class="fa-regular fa-calendar-days text-agency-500 mr-1.5"></i>${new Date(article.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                                        <span><i class="fa-regular fa-user text-agency-500 mr-1.5"></i>${article.author}</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-agency-500 transition-colors uppercase tracking-tight">
+                                        <a href="/artikel/${article.slug}" class="outline-none">${article.title}</a>
+                                    </h3>
+                                    <p class="text-slate-300 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
+                                        ${article.description}
+                                    </p>
+                                    <div class="mt-auto">
+                                        <a href="/artikel/${article.slug}" class="inline-flex items-center text-sm font-extrabold text-agency-500 group-hover:translate-x-1.5 transition-transform uppercase tracking-wider gap-2 outline-none">
+                                            Baca Selengkapnya <i class="fa-solid fa-arrow-right-long"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        `).join('');
+                    })
+                    .catch(err => {
+                        console.error('Error fetching fallback articles:', err);
+                        if (loader) {
+                            loader.innerHTML = `
+                                <i class="fa-solid fa-triangle-exclamation text-3xl text-red-500 mb-2"></i>
+                                <p class="text-slate-400 font-bold">Gagal memuat daftar artikel. Silakan coba beberapa saat lagi.</p>
+                            `;
+                        }
+                    });
+            }
+        }
+
+        // Bulletproof initialization guard in case DOMContentLoaded has already fired
+        if (document.readyState === 'loading') {
+            document.addEventListener("DOMContentLoaded", loadArticles);
+        } else {
+            loadArticles();
+        }
+    </script>
+</body>
+</html>

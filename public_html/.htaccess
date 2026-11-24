@@ -1,0 +1,24 @@
+RewriteEngine On
+
+# Ensure HTTPS is enforced if enabled
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Route API requests to api.php
+# Handle specific article delete/fetch like /api/articles/some-slug
+RewriteRule ^api/articles/([^/]+)$ /api.php?slug=$1 [QSA,L]
+# Handle general articles list /api/articles
+RewriteRule ^api/articles$ /api.php [QSA,L]
+
+# Route Article details like /artikel/judul-slug to baca.php
+# Skip actual files (e.g. index.html, admin.html, baca.html, etc.)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^artikel/([^/]+)$ /artikel/baca.php?slug=$1 [QSA,L]
+
+# Remove trailing slash for general URLs if not a directory
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# Serve index.html automatically for directories
+DirectoryIndex index.html

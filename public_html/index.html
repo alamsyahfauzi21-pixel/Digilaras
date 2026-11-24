@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <!-- Bulletproof fetch setter patch to prevent Uncaught TypeError: Cannot set property fetch of #<Window> which has only a getter -->
+    <script>
+        (function() {
+            try {
+                var originalFetch = window.fetch;
+                var currentFetch = originalFetch;
+                Object.defineProperty(window, 'fetch', {
+                    configurable: true,
+                    enumerable: true,
+                    get: function() { return currentFetch; },
+                    set: function(val) { currentFetch = val; }
+                });
+            } catch (e) {
+                // Safe fallback
+            }
+        })();
+    </script>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KCN5X6NF');</script>
+<!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIGILARAS | Digital Marketing Agency & Web Development</title>
+    <meta name="description" content="Digital Marketing Agency dan Jasa Web Development profesional untuk UMKM dan Bisnis Menengah. Ekosistem digital terintegrasi untuk mendominasi pasar.">
+    <link rel="canonical" href="https://digilaras.com/">
+    <meta property="og:title" content="DIGILARAS | Digital Marketing Agency & Web Development">
+    <meta property="og:description" content="Digital Marketing Agency dan Jasa Web Development profesional untuk UMKM dan Bisnis Menengah.">
+    <meta property="og:url" content="https://digilaras.com/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23022c22'/><path d='M30 70V30h20c15 0 25 10 25 20s-10 20-25 20H30zm10-10h10c10 0 15-5 15-10s-5-10-15-10H40v20z' fill='%23facc15'/></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="bg-agency-900 text-slate-300 antialiased overflow-x-hidden"> 
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCN5X6NF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <div id="header-placeholder"></div>
+
+    <main class="pt-20">
+        <section id="home" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden pb-12 lg:pb-0">
+            <!-- Animated Background Blobs -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-agency-600/30 rounded-full blur-[100px] pointer-events-none animate-blob"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-yellow-600/30 rounded-full blur-[120px] pointer-events-none animate-blob animation-delay-2000"></div>
+            <div class="absolute top-1/2 left-1/2 w-72 h-72 bg-accent-500/20 rounded-full blur-[100px] pointer-events-none animate-blob animation-delay-4000"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-16 lg:py-20">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    
+                    <!-- Copywriting -->
+                    <div class="reveal mt-8 lg:mt-0 z-20">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-agency-500 font-bold text-sm uppercase tracking-widest mb-6">
+                            <span class="relative flex h-3 w-3 shrink-0">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-agency-500 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-agency-600"></span>
+                            </span>
+                            Creative & Performance Agency
+                        </div>
+                        <h1 class="text-4xl md:text-5xl lg:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tight uppercase">
+                            Ekosistem Digital <span class="text-gradient">Terintegrasi.</span>
+                        </h1>
+                        <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-lg leading-relaxed font-light tracking-wide">
+                            Dari merancang website e-commerce profesional, mengelola sosial media yang engaging, hingga melipatgandakan omset melalui Google & Meta Ads. Kami bangun fondasi bisnis Anda.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="/contact/" class="inline-flex justify-center items-center px-8 py-4 bg-agency-500 text-agency-950 font-bold rounded-full hover:bg-yellow-400 transition-all transform hover:-translate-y-1 hover:shadow-glow-yellow uppercase tracking-wider text-sm group">
+                                Hubungi Kami <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                            <a href="#layanan" class="inline-flex justify-center items-center px-8 py-4 bg-transparent border-2 border-agency-500 text-agency-500 font-bold rounded-full hover:bg-agency-500/10 transition-all uppercase tracking-wider text-sm">
+                                Jelajahi Layanan
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Visual Mockup (Digital Ecosystem Hub) -->
+                    <div class="reveal reveal-delay-2 relative w-full h-[450px] lg:h-[550px] flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-agency-500/20 to-agency-600/20 rounded-full blur-[80px]"></div>
+                        
+                        <!-- Center Core (Brand) -->
+                        <div class="absolute w-32 h-32 md:w-40 md:h-40 bg-agency-950 rounded-full border-4 border-agency-500/50 shadow-[0_0_50px_rgba(250,204,21,0.3)] flex items-center justify-center z-30 animate-pulse">
+                            <i class="fa-solid fa-bolt text-5xl md:text-6xl text-agency-500"></i>
+                        </div>
+
+                        <!-- Orbiting Elements -->
+                        <div class="absolute -top-4 md:top-4 left-0 md:left-4 bg-agency-900 border border-blue-500/40 p-4 rounded-xl shadow-2xl z-40 animate-float-delayed transform -rotate-6">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-8 h-8 rounded bg-blue-500/20 flex items-center justify-center text-blue-400"><i class="fa-solid fa-code"></i></div>
+                                <span class="text-xs font-bold text-slate-300 uppercase">Web Dev</span>
+                            </div>
+                            <div class="w-24 h-2 bg-slate-700 rounded-full mb-1.5"></div>
+                            <div class="w-16 h-2 bg-blue-500/50 rounded-full"></div>
+                        </div>
+
+                        <div class="absolute bottom-4 md:bottom-12 left-4 md:left-0 bg-agency-900 border border-pink-500/40 p-4 rounded-xl shadow-2xl z-40 animate-float transform rotate-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 p-[2px]">
+                                    <div class="w-full h-full bg-agency-900 rounded-full border border-black flex items-center justify-center">
+                                        <i class="fa-solid fa-heart text-pink-500 text-sm"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] text-slate-400 uppercase tracking-widest">Followers</div>
+                                    <div class="text-sm font-bold text-white">+12.5K</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute top-10 right-0 md:-right-4 bg-agency-900 border border-green-500/40 p-4 rounded-xl shadow-2xl z-40 animate-float-fast transform rotate-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-8 h-8 rounded bg-green-500/20 flex items-center justify-center text-green-400"><i class="fa-solid fa-chart-pie"></i></div>
+                                <span class="text-xs font-bold text-slate-300 uppercase">Ads ROAS</span>
+                            </div>
+                            <div class="flex items-end gap-1 h-8">
+                                <div class="w-3 bg-green-600/40 rounded-t h-[30%]"></div>
+                                <div class="w-3 bg-green-600/60 rounded-t h-[60%]"></div>
+                                <div class="w-3 bg-green-500 rounded-t h-[90%] shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+                                <div class="text-lg font-black text-white ml-2">4.5x</div>
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-16 right-4 md:right-8 bg-agency-900 border border-agency-500/40 p-3 md:p-4 rounded-xl shadow-2xl z-40 animate-float-delayed transform -rotate-3">
+                            <div class="flex gap-3 items-center">
+                                <div class="w-10 h-10 bg-agency-500/20 rounded-lg flex items-center justify-center text-agency-500"><i class="fa-solid fa-cart-shopping"></i></div>
+                                <div>
+                                    <p class="text-[10px] text-slate-400 uppercase tracking-widest">Sales</p>
+                                    <p class="text-sm font-black text-white">Rp 85 Jt</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <svg class="absolute inset-0 w-full h-full z-20 pointer-events-none opacity-20" viewBox="0 0 400 400">
+                            <circle cx="200" cy="200" r="120" fill="none" stroke="#facc15" stroke-width="1" stroke-dasharray="4 4" class="origin-center animate-[spin_20s_linear_infinite]" />
+                            <circle cx="200" cy="200" r="160" fill="none" stroke="#c53030" stroke-width="1" stroke-dasharray="8 8" class="origin-center animate-[spin_30s_linear_infinite_reverse]" />
+                        </svg>
+
+                    </div>
+                </div>
+            </div>
+            
+
+        </section>
+
+        <section id="layanan" class="py-24 bg-agency-900 relative border-t border-agency-500/10 z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+                    <h2 class="text-lg font-bold text-agency-500 uppercase tracking-widest mb-3">4 Pilar Pertumbuhan</h2>
+                    <h3 class="text-4xl md:text-5xl font-black text-white mb-6 uppercase">Layanan Agensi Terpadu</h3>
+                    <p class="text-slate-300 text-lg tracking-wide">Pilih satu layanan atau kombinasikan semuanya. Kami menyediakan solusi end-to-end untuk dominasi pasar digital Anda.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+                    <!-- Web Dev Card -->
+                    <div class="reveal bg-agency-950 p-8 rounded-3xl border border-agency-500/20 hover:border-agency-500/60 transition-all duration-300 group hover:-translate-y-2 hover:shadow-glow relative overflow-hidden flex flex-col h-full">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-bl-full pointer-events-none group-hover:bg-blue-500/20 transition-colors"></div>
+                        <div class="w-16 h-16 bg-agency-900 rounded-xl flex items-center justify-center border border-blue-500/30 mb-6 shrink-0 shadow-lg">
+                            <i class="fa-solid fa-laptop-code text-3xl text-blue-400 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white mb-4 uppercase tracking-wide">Web Development</h4>
+                        <p class="text-slate-300 mb-6 text-base leading-relaxed tracking-wide flex-1">Pembuatan Landing Page konversi tinggi, Company Profile profesional, hingga platform E-Commerce dengan sistem kasir (payment gateway) terintegrasi.</p>
+                        <div class="border-t border-white/10 pt-6 mt-auto">
+                            <ul class="space-y-2 text-sm text-slate-400 font-medium mb-6">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-500"></i> Desain UI/UX Premium</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-500"></i> Optimasi Kecepatan Load</li>
+                            </ul>
+                            <a href="/layanan/pembuatan-website/" class="inline-block text-blue-400 font-bold uppercase tracking-wider text-sm hover:text-white transition-colors">Lihat Layanan Web <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Meta Ads Card -->
+                    <div class="reveal reveal-delay-1 bg-agency-950 p-8 rounded-3xl border border-agency-500/20 hover:border-agency-500/60 transition-all duration-300 group hover:-translate-y-2 hover:shadow-glow relative overflow-hidden flex flex-col h-full">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-pink-500/10 rounded-bl-full pointer-events-none group-hover:bg-pink-500/20 transition-colors"></div>
+                        <div class="w-16 h-16 bg-agency-900 rounded-xl flex items-center justify-center border border-pink-500/30 mb-6 shrink-0 shadow-lg">
+                            <i class="fa-brands fa-meta text-3xl text-pink-400 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white mb-4 uppercase tracking-wide">Facebook & IG Ads</h4>
+                        <p class="text-slate-300 mb-6 text-base leading-relaxed tracking-wide flex-1">Skalasi penjualan melalui Meta Ads. Kami menangani setup Meta Pixel, pengujian materi iklan (A/B Testing), hingga strategi Retargeting audiens akurat.</p>
+                        <div class="border-t border-white/10 pt-6 mt-auto">
+                            <ul class="space-y-2 text-sm text-slate-400 font-medium mb-6">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Campaign Leads & Sales</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Copywriting & Creative Ads</li>
+                            </ul>
+                            <a href="/layanan/meta-ads/" class="inline-block text-pink-400 font-bold uppercase tracking-wider text-sm hover:text-white transition-colors">Lihat Layanan Meta Ads <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Google Ads Card -->
+                    <div class="reveal reveal-delay-2 bg-agency-950 p-8 rounded-3xl border border-agency-500/20 hover:border-agency-500/60 transition-all duration-300 group hover:-translate-y-2 hover:shadow-glow relative overflow-hidden flex flex-col h-full">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-green-500/10 rounded-bl-full pointer-events-none group-hover:bg-green-500/20 transition-colors"></div>
+                        <div class="w-16 h-16 bg-agency-900 rounded-xl flex items-center justify-center border border-green-500/30 mb-6 shrink-0 shadow-lg">
+                            <i class="fa-brands fa-google text-3xl text-green-400 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white mb-4 uppercase tracking-wide">Google Search & PMax</h4>
+                        <p class="text-slate-300 mb-6 text-base leading-relaxed tracking-wide flex-1">Tangkap audiens yang sudah memiliki "Niat Beli" (High Intent). Kami optimasi kata kunci dan Performance Max untuk mendominasi halaman pertama Google.</p>
+                        <div class="border-t border-white/10 pt-6 mt-auto">
+                            <ul class="space-y-2 text-sm text-slate-400 font-medium mb-6">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Riset Keyword Kompetitor</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Setup Google Analytics 4 & Tag Manager</li>
+                            </ul>
+                            <a href="/layanan/google-ads/" class="inline-block text-green-400 font-bold uppercase tracking-wider text-sm hover:text-white transition-colors">Lihat Layanan Google Ads <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Card -->
+                    <div class="reveal reveal-delay-3 bg-agency-950 p-8 rounded-3xl border border-agency-500/20 hover:border-agency-500/60 transition-all duration-300 group hover:-translate-y-2 hover:shadow-glow relative overflow-hidden flex flex-col h-full">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-agency-500/10 rounded-bl-full pointer-events-none group-hover:bg-agency-500/20 transition-colors"></div>
+                        <div class="w-16 h-16 bg-agency-900 rounded-xl flex items-center justify-center border border-agency-500/30 mb-6 shrink-0 shadow-lg">
+                            <i class="fa-solid fa-hashtag text-3xl text-agency-500 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white mb-4 uppercase tracking-wide">Sosmed Management</h4>
+                        <p class="text-slate-300 mb-6 text-base leading-relaxed tracking-wide flex-1">Ubah followers menjadi komunitas loyal. Tim kami memproduksi ide konten, desain feed premium, hingga editing video Reels & TikTok harian.</p>
+                        <div class="border-t border-white/10 pt-6 mt-auto">
+                            <ul class="space-y-2 text-sm text-slate-400 font-medium mb-6">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-agency-500"></i> Kalender Konten & Copywriting</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-agency-500"></i> Desain Visual & Admin Posting</li>
+                            </ul>
+                            <a href="/layanan/social-media-management/" class="inline-block text-agency-500 font-bold uppercase tracking-wider text-sm hover:text-white transition-colors">Lihat Layanan Sosmed <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="harga" class="py-24 bg-agency-950 border-t border-agency-500/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <h2 class="text-lg font-bold text-agency-500 uppercase tracking-widest mb-3">Transparansi Anggaran</h2>
+                    <h3 class="text-4xl md:text-5xl font-black text-white mb-5 uppercase">Investasi Layanan</h3>
+                    <p class="text-slate-300 text-base md:text-lg leading-relaxed tracking-wide">Solusi fleksibel sesuai kebutuhan skala bisnis Anda. <br class="hidden md:block">Diskusikan kebutuhan spesifik Anda untuk penawaran kustom.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Harga Web -->
+                    <div class="reveal bg-agency-900 p-6 rounded-2xl border border-agency-500/20 hover:border-blue-500/50 transition-all text-center group">
+                        <div class="text-blue-400 mb-3"><i class="fa-solid fa-laptop-code text-3xl"></i></div>
+                        <h4 class="text-lg font-bold text-white uppercase tracking-wide mb-2">Web Dev</h4>
+                        <p class="text-xs text-slate-400 uppercase tracking-widest mb-4">Biaya Pembuatan Jasa</p>
+                        <div class="text-2xl font-black text-white mb-6">Mulai Rp 1.5jt</div>
+                        <div class="w-full h-[1px] bg-white/10 mb-6"></div>
+                        <p class="text-sm text-slate-300 mb-6 min-h-[3rem]">Landing Page konversi tinggi. E-Commerce kustom tersedia.</p>
+                        <a href="/layanan/pembuatan-website/" class="block w-full py-2.5 text-xs font-bold text-blue-400 border border-blue-400/50 rounded-lg group-hover:bg-blue-500 group-hover:text-white transition-all uppercase tracking-wider">Pilih Web Dev</a>
+                    </div>
+
+                    <!-- Harga Sosmed -->
+                    <div class="reveal reveal-delay-1 bg-agency-900 p-6 rounded-2xl border border-agency-500/20 hover:border-agency-500/50 transition-all text-center group">
+                        <div class="text-agency-500 mb-3"><i class="fa-solid fa-hashtag text-3xl"></i></div>
+                        <h4 class="text-lg font-bold text-white uppercase tracking-wide mb-2">Sosmed Mgt</h4>
+                        <p class="text-xs text-slate-400 uppercase tracking-widest mb-4">Biaya Kelola / Bulan</p>
+                        <div class="text-2xl font-black text-white mb-6">Mulai Rp 1.5jt</div>
+                        <div class="w-full h-[1px] bg-white/10 mb-6"></div>
+                        <p class="text-sm text-slate-300 mb-6 min-h-[3rem]">Termasuk desain feed, copywriting & admin auto-posting.</p>
+                        <a href="/layanan/social-media-management/" class="block w-full py-2.5 text-xs font-bold text-agency-500 border border-agency-500/50 rounded-lg group-hover:bg-agency-500 group-hover:text-agency-950 transition-all uppercase tracking-wider">Pilih Sosmed</a>
+                    </div>
+
+                    <!-- Harga Meta -->
+                    <div class="reveal reveal-delay-2 bg-agency-900 p-6 rounded-2xl border border-agency-500/20 hover:border-pink-500/50 transition-all text-center group">
+                        <div class="text-pink-400 mb-3"><i class="fa-brands fa-meta text-3xl"></i></div>
+                        <h4 class="text-lg font-bold text-white uppercase tracking-wide mb-2">Meta Ads</h4>
+                        <p class="text-xs text-slate-400 uppercase tracking-widest mb-4">Jasa Agensi / Bulan</p>
+                        <div class="text-2xl font-black text-white mb-6">Mulai Rp 1.5jt</div>
+                        <div class="w-full h-[1px] bg-white/10 mb-6"></div>
+                        <p class="text-sm text-slate-300 mb-6 min-h-[3rem]">Optimasi struktur FB/IG Ads. *Tidak termasuk budget saldo iklan.</p>
+                        <a href="/layanan/meta-ads/" class="block w-full py-2.5 text-xs font-bold text-pink-400 border border-pink-400/50 rounded-lg group-hover:bg-pink-500 group-hover:text-white transition-all uppercase tracking-wider">Pilih Meta Ads</a>
+                    </div>
+
+                    <!-- Harga Google -->
+                    <div class="reveal reveal-delay-3 bg-agency-900 p-6 rounded-2xl border border-agency-500/20 hover:border-green-500/50 transition-all text-center group relative overflow-hidden">
+                        <div class="absolute -top-3 -right-3 w-16 h-16 bg-agency-600 rounded-full flex items-end justify-start p-2 rotate-45 z-0"><span class="text-[10px] font-black text-white uppercase tracking-widest">HOT</span></div>
+                        <div class="text-green-400 mb-3 relative z-10"><i class="fa-brands fa-google text-3xl"></i></div>
+                        <h4 class="text-lg font-bold text-white uppercase tracking-wide mb-2 relative z-10">Google Ads</h4>
+                        <p class="text-xs text-slate-400 uppercase tracking-widest mb-4 relative z-10">Jasa Agensi / Bulan</p>
+                        <div class="text-2xl font-black text-white mb-6 relative z-10">Mulai Rp 1.5jt</div>
+                        <div class="w-full h-[1px] bg-white/10 mb-6 relative z-10"></div>
+                        <p class="text-sm text-slate-300 mb-6 min-h-[3rem] relative z-10">Search & PMax campaign. *Tidak termasuk budget saldo iklan.</p>
+                        <a href="/layanan/google-ads/" class="block w-full py-2.5 text-xs font-bold text-green-400 border border-green-400/50 rounded-lg group-hover:bg-green-500 group-hover:text-white transition-all uppercase tracking-wider relative z-10">Pilih Google Ads</a>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center reveal">
+                    <p class="text-slate-400 text-sm mb-4 italic">* Harga di atas adalah harga dasar layanan (Starter). Untuk melihat fitur lengkap, silahkan hubungi tim konsultan kami.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="keunggulan" class="py-24 bg-agency-900 relative z-20 border-t border-agency-500/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative reveal">
+                <div class="bg-agency-950 rounded-3xl p-8 md:p-12 border border-agency-500/20 shadow-[0_15px_40px_-15px_rgba(0,0,0,0.8)] relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-agency-600/10 to-transparent pointer-events-none"></div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+                        <div>
+                            <h2 class="text-lg font-bold text-agency-500 uppercase tracking-widest mb-3">Mengapa DIGILARAS?</h2>
+                            <h3 class="text-3xl md:text-4xl font-black text-white uppercase tracking-wide mb-6">Partner Bisnis Berbasis Data & Konversi.</h3>
+                            <p class="text-slate-300 text-base md:text-lg tracking-wide leading-relaxed mb-6">
+                                Kami bukan sekadar vendor yang menerima perintah. Kami bertindak sebagai perpanjangan tangan tim marketing Anda yang memikirkan 
+                                <span class="text-agency-500 font-bold">Return on Investment (ROI)</span> di setiap kampanye.
+                            </p>
+                            <ul class="space-y-4 text-slate-300">
+                                <li class="flex items-start gap-3"><div class="mt-1 w-5 h-5 rounded-full bg-agency-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-white text-[10px]"></i></div> Laporan Kinerja Transparan & Terukur</li>
+                                <li class="flex items-start gap-3"><div class="mt-1 w-5 h-5 rounded-full bg-agency-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-white text-[10px]"></i></div> Tim Spesialis Profesional Berpengalaman</li>
+                                <li class="flex items-start gap-3"><div class="mt-1 w-5 h-5 rounded-full bg-agency-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-white text-[10px]"></i></div> Support Cepat & Responsif (Grup WA VIP)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-agency-900 border border-agency-500/20 p-6 rounded-2xl text-center shadow-lg">
+                                <div class="text-4xl font-black text-agency-500 mb-2">25+</div>
+                                <div class="text-xs text-slate-400 uppercase tracking-widest font-bold">Klien Aktif</div>
+                            </div>
+                            <div class="bg-agency-900 border border-agency-500/20 p-6 rounded-2xl text-center shadow-lg transform translate-y-6">
+                                <div class="text-4xl font-black text-agency-500 mb-2">12+</div>
+                                <div class="text-xs text-slate-400 uppercase tracking-widest font-bold">Pakar Industri</div>
+                            </div>
+                            <div class="bg-agency-900 border border-agency-500/20 p-6 rounded-2xl text-center shadow-lg">
+                                <div class="text-4xl font-black text-agency-500 mb-2">100 Juta+</div>
+                                <div class="text-xs text-slate-400 uppercase tracking-widest font-bold">Ad Spend Terkelola</div>
+                            </div>
+                            <div class="bg-agency-900 border border-agency-500/20 p-6 rounded-2xl text-center shadow-lg transform translate-y-6">
+                                <div class="text-4xl font-black text-agency-500 mb-2">98%</div>
+                                <div class="text-xs text-slate-400 uppercase tracking-widest font-bold">Retensi Klien</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script type="module" src="/assets/js/main.js"></script>
+</body>
+</html>

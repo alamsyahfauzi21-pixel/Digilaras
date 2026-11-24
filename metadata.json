@@ -1,0 +1,6 @@
+{
+  "name": "Digilaras",
+  "description": "Website resmi untuk agensi pemasaran digital dan jasa pembuatan website Digilaras.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

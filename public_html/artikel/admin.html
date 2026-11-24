@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <!-- Bulletproof fetch setter patch to prevent Uncaught TypeError: Cannot set property fetch of #<Window> which has only a getter -->
+    <script>
+        (function() {
+            try {
+                var originalFetch = window.fetch;
+                var currentFetch = originalFetch;
+                Object.defineProperty(window, 'fetch', {
+                    configurable: true,
+                    enumerable: true,
+                    get: function() { return currentFetch; },
+                    set: function(val) { currentFetch = val; }
+                });
+            } catch (e) {
+                // Safe fallback
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard Artikel | DIGILARAS</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23022c22'/><path d='M30 70V30h20c15 0 25 10 25 20s-10 20-25 20H30zm10-10h10c10 0 15-5 15-10s-5-10-15-10H40v20z' fill='%23facc15'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="bg-agency-950 text-slate-300 antialiased overflow-x-hidden min-h-screen">
+
+    <!-- Simple Navigation for Admin -->
+    <header class="bg-agency-950 border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="/" class="text-xl font-black text-white tracking-tighter uppercase flex items-center">
+                    <i class="fa-solid fa-bolt text-agency-500 mr-2"></i>DIGI<span class="text-agency-500">LARAS.</span> <span class="ml-2 text-xs text-slate-400 bg-white/10 px-2 py-0.5 rounded font-bold tracking-widest">ADMIN</span>
+                </a>
+                <div class="flex gap-4">
+                    <a href="/artikel/" class="text-sm font-bold text-agency-500 hover:text-white transition-colors flex items-center gap-1.5 uppercase tracking-wider">
+                        <i class="fa-solid fa-arrow-left"></i> Lihat Artikel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- Dashboard Intro -->
+        <div class="mb-10">
+            <h1 class="text-3xl font-black text-white uppercase tracking-tight mb-2">Sistem Pengelola Artikel</h1>
+            <p class="text-slate-400 text-sm">Publikasikan konten baru secara instan untuk memperluas audiens organik dan meningkatkan peringkat SEO di Google serta keterbacaan AI.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Form Column (Left 2 cols) -->
+            <div class="lg:col-span-2">
+                <div class="bg-agency-900/40 border border-white/10 rounded-2xl p-6 sm:p-8 backdrop-blur-md">
+                    <h2 class="text-xl font-black text-white uppercase tracking-wider mb-6 flex items-center gap-2">
+                        <i class="fa-regular fa-pen-to-square text-agency-500"></i> Tulis Artikel Baru
+                    </h2>
+                    
+                    <form id="create-article-form" class="space-y-6">
+                        <!-- Title & Slug -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="title" class="block text-xs uppercase font-extrabold tracking-widest text-slate-400 mb-2">Judul Artikel <span class="text-red-500">*</span></label>
+                                <input type="text" id="title" required placeholder="Contoh: Belajar SEO Dasar untuk UMKM" 
+                                    class="w-full bg-agency-950 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:border-agency-500 focus:ring-1 focus:ring-agency-500 transition-all outline-none">
+                            </div>
+                            <div>
+                                <label for="slug" class="block text-xs uppercase font-extrabold tracking-widest text-slate-400 mb-2">Slug URL (Auto) <span class="text-red-500">*</span></label>
+                                <input type="text" id="slug" required placeholder="belajar-seo-dasar-untuk-umkm" 
+                                    class="w-full bg-agency-950 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:border-agency-500 focus:ring-1 focus:ring-agency-500 transition-all outline-none font-mono">
+                            </div>
+                        </div>
+
+                        <!-- Author, Category, & Image URL -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label for="category" class="block text-xs uppercase font-extrabold tracking-widest text-slate-400 mb-2">Kategori <span class="text-red-500">*</span></label>
+                                <select id="category" required 
+                                    class="w-full bg-agency-950 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:border-agency-500 focus:ring-1 focus:ring-agency-500 transition-all outline-none">
+                                    <option value="SEO">SEO</option>
+                                    <option value="Web Development">Web Development</option>
+                                    <option value="Digital Marketing" selected>Digital Marketing</option>
+                                    <option value="Google Ads">Google Ads</option>
+                                    <option value="Meta Ads">Meta Ads</option>
+                                    <option value="Social Media">Social Media</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="author" class="block text-xs uppercase font-extrabold tracking-widest text-slate-400 mb-2">Penulis <span class="text-red-500">*</span></label>
+                                <input type="text" id="author" required value="Tim Digilaras" 
+                                    class="w-full bg-agency-950 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:border-agency-500 focus:ring-1 focus:ring-agency-500 transition-all outline-none">
+                            </div>
+                            <div>
+                                <label for="date" class="block text-xs uppercase font-extrabold tracking-widest text-slate-400 mb-2">Tanggal Terbit <span class="text-red-500">*</span></label>
+                                <input type="date" id="date" required 
+                                    class="w-full bg-agency-950 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:border-agency-500 focus:ring-1 focus:ring-agency-500 transition-all outline-none">
+                            </div>
+                        </div>
+
+                        <!-- Image URL with helper -->
+                        <div>
+                            <label for="coverImage" class="block text-xs uppercase font-extrabold tracking-widest text-slate-400 mb-2">URL Gambar Cover</label>
+                            <input type="url" id="coverImage" placeholder="https://images.unsplash.com/photo-..." 
+                                class="w-full bg-agency-950 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:border-agency-500 focus:ring-1 focus:ring-agency-500 transition-all outline-none mb-2">
+                            <p class="text-[11px] text-slate-400">Gunakan tautan Unsplash atau link eksternal beresolusi 1200x630px untuk rasio terbaik.</p>
+                        </div>
+
+                        <!-- Description -->
+                        <div>
+                            <label for="description" class="block text-xs uppercase font-extrabold tracking-widest text-slate-400 mb-2">Ringkasan Singkat (Meta Description) <span class="text-red-500">*</span></label>
+                            <textarea id="description" required rows="2" maxlength="160" placeholder="Tuliskan 1-2 kalimat ringkasan yang menarik minat klik di halaman Google (maks 160 karakter)..." 
+                                class="w-full bg-agency-950 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:border-agency-500 focus:ring-1 focus:ring-agency-500 transition-all outline-none resize-none"></textarea>
+                        </div>
+
+                        <!-- Article Content -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label for="content" class="block text-xs uppercase font-extrabold tracking-widest text-slate-400">Konten Artikel (HTML) <span class="text-red-500">*</span></label>
+                                <span class="text-[10px] bg-agency-600/30 text-agency-500 font-bold px-2 py-0.5 rounded flex items-center gap-1">
+                                    <i class="fa-solid fa-code"></i> HTML Diizinkan
+                                </span>
+                            </div>
+                            <textarea id="content" required rows="10" placeholder="Gunakan tag HTML dasar seperti <p>, <h3>, <strong>, <ul>, <li> untuk performa tampilan artikel yang kaya..." 
+                                class="w-full bg-agency-950 border border-white/15 rounded-xl px-4 py-4 text-white text-sm focus:border-agency-500 focus:ring-1 focus:ring-agency-500 transition-all outline-none font-mono"></textarea>
+                            
+                            <!-- Formatting Quick Tips -->
+                            <div class="mt-2 p-3 bg-white/5 border border-white/5 rounded-xl text-xs space-y-1">
+                                <p class="text-slate-400 font-bold uppercase tracking-wider text-[10px] mb-1">Panduan Format Cepat:</p>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-slate-300">
+                                    <div><code class="text-agency-500">&lt;p&gt;Paragraf&lt;/p&gt;</code></div>
+                                    <div><code class="text-agency-500">&lt;h3&gt;Sub-judul&lt;/h3&gt;</code></div>
+                                    <div><code class="text-agency-500">&lt;strong&gt;Tebal&lt;/strong&gt;</code></div>
+                                    <div><code class="text-agency-500">&lt;ul&gt; &lt;li&gt;List&lt;/li&gt; &lt;/ul&gt;</code></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Auth Passcode to prevent spam -->
+                        <div class="p-4 bg-red-950/20 border border-red-500/20 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div class="flex gap-3 items-center">
+                                <i class="fa-solid fa-shield-halved text-red-500 text-2xl"></i>
+                                <div>
+                                    <p class="text-sm font-bold text-white">Verifikasi Keamanan Publikasi</p>
+                                    <p class="text-xs text-slate-400">Masukkan Passcode Admin untuk menyelesaikan penerbitan artikel.</p>
+                                </div>
+                            </div>
+                            <input type="password" id="passcode" required placeholder="Sandi Admin" value="digilaras2026"
+                                class="bg-agency-950 border border-red-500/20 rounded-xl px-4 py-2 text-white text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all outline-none text-center font-bold tracking-wider w-full md:w-44">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="submit-btn" class="w-full inline-flex items-center justify-center px-6 py-4 bg-agency-600 hover:bg-agency-500 hover:text-agency-950 text-white font-bold rounded-xl shadow-glow transition-all duration-300 uppercase tracking-widest text-sm">
+                            <i class="fa-solid fa-cloud-arrow-up mr-2"></i> Terbitkan Artikel Secara Instan
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Manage Column (Right 1 col) -->
+            <div>
+                <div class="bg-agency-900/40 border border-white/10 rounded-2xl p-6 backdrop-blur-md">
+                    <h2 class="text-lg font-black text-white uppercase tracking-wider mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-agency-500"></i> Kelola Artikel (${length})
+                    </h2>
+                    
+                    <div id="articles-list" class="space-y-4 max-h-[600px] overflow-y-auto pr-1">
+                        <!-- Existing articles loaded here -->
+                        <div class="text-center py-8 text-slate-400">
+                            <i class="fa-solid fa-circle-notch animate-spin text-xl text-agency-500 mb-2"></i>
+                            <p class="text-xs">Mengambil daftar...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Simple Toast System -->
+    <div id="toast" class="fixed bottom-6 left-6 bg-agency-900 border border-agency-500 text-white rounded-2xl px-5 py-3 shadow-glow-yellow hidden flex items-center gap-3 z-50">
+        <i class="fa-solid fa-circle-check text-agency-500 text-lg" id="toast-icon"></i>
+        <span class="text-sm font-semibold" id="toast-text">Pesan terkirim!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Set date input to today
+        document.getElementById('date').valueAsDate = new Date();
+
+        // Auto-generate slug from title
+        const titleInput = document.getElementById('title');
+        const slugInput = document.getElementById('slug');
+
+        titleInput.addEventListener('input', () => {
+            const titleVal = titleInput.value;
+            const slugVal = titleVal
+                .toLowerCase()
+                .trim()
+                .replace(/[^\w\s-]/g, '') // remove special chars
+                .replace(/[\s_]+/g, '-')  // replace spaces with -
+                .replace(/-+/g, '-');      // remove duplicate -
+            slugInput.value = slugVal;
+        });
+
+        // Toast system
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const text = document.getElementById('toast-text');
+            const icon = document.getElementById('toast-icon');
+
+            text.innerText = message;
+            if (type === 'error') {
+                toast.classList.replace('border-agency-500', 'border-red-500');
+                icon.className = 'fa-solid fa-circle-xmark text-red-500 text-lg';
+            } else {
+                toast.classList.replace('border-red-500', 'border-agency-500');
+                icon.className = 'fa-solid fa-circle-check text-agency-500 text-lg';
+            }
+
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Helper to get bulletproof API URL based on environment
+        function getApiUrl(endpoint, slug = '') {
+            // Node/Vite development environment always runs on port 3000 or AI Studio container domains
+            const isNodeDev = window.location.hostname.includes('ais-dev') || 
+                              window.location.hostname.includes('ais-pre') || 
+                              window.location.port === '3000';
+            if (isNodeDev) {
+                return slug ? `/api/articles/${slug}` : '/api/articles';
+            } else {
+                // On PHP environments (production Hostinger, local XAMPP/Apache, php -S),
+                // we dynamically calculate the basePath of the subdirectory to ensure compatibility on localhost (e.g. localhost/digilaras/public_html/)
+                const pathname = window.location.pathname;
+                const index = pathname.toLowerCase().indexOf('/artikel');
+                let basePath = '';
+                if (index !== -1) {
+                    basePath = pathname.substring(0, index);
+                }
+                return slug ? `${basePath}/api.php?slug=${slug}` : `${basePath}/api.php`;
+            }
+        }
+
+        // Fetch existing articles
+        function loadArticles() {
+            const listContainer = document.getElementById('articles-list');
+            
+            fetch(getApiUrl('articles'))
+                .then(res => {
+                    if (!res.ok) throw new Error('Response not OK');
+                    return res.json();
+                })
+                .then(articles => {
+                    if (!articles || articles.length === 0) {
+                        listContainer.innerHTML = `
+                            <p class="text-xs text-center text-slate-400 py-4">Belum ada artikel yang dibuat.</p>
+                        `;
+                        return;
+                    }
+
+                    listContainer.innerHTML = articles.map(article => `
+                        <div class="p-4 bg-agency-950/60 border border-white/5 rounded-xl flex justify-between items-start gap-4 hover:border-white/10 transition-colors">
+                            <div class="min-w-0">
+                                <span class="text-[10px] font-extrabold uppercase text-agency-500 bg-white/5 px-2 py-0.5 rounded">${article.category}</span>
+                                <h4 class="text-sm font-bold text-white mt-1 truncate" title="${article.title}">${article.title}</h4>
+                                <p class="text-[11px] text-slate-400 mt-1 font-mono">/${article.slug}</p>
+                            </div>
+                            <button onclick="deleteArticle('${article.slug}')" class="text-red-500 hover:text-red-400 p-1.5 rounded bg-red-500/10 hover:bg-red-500/20 transition-all outline-none" title="Hapus artikel">
+                                <i class="fa-regular fa-trash-can text-sm"></i>
+                            </button>
+                        </div>
+                    `).join('');
+                })
+                .catch(err => {
+                    console.error('Error loading admin articles:', err);
+                    listContainer.innerHTML = `<p class="text-xs text-red-500 text-center py-4">Gagal memuat artikel.</p>`;
+                });
+        }
+
+        // Handle create article submission
+        const form = document.getElementById('create-article-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const slug = document.getElementById('slug').value;
+            const category = document.getElementById('category').value;
+            const author = document.getElementById('author').value;
+            const date = document.getElementById('date').value;
+            const coverImage = document.getElementById('coverImage').value;
+            const description = document.getElementById('description').value;
+            const content = document.getElementById('content').value;
+            const passcode = document.getElementById('passcode').value;
+
+            if (!passcode) {
+                showToast('Masukkan passcode keamanan admin.', 'error');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submit-btn');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-2"></i> Menerbitkan...';
+
+            fetch(getApiUrl('articles'), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title, slug, category, author, date, coverImage, description, content, passcode
+                })
+            })
+            .then(res => res.json().then(data => ({ status: res.status, data })))
+            .then(({ status, data }) => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+
+                if (status === 201) {
+                    showToast('Artikel berhasil diterbitkan!');
+                    form.reset();
+                    document.getElementById('date').valueAsDate = new Date();
+                    loadArticles();
+                } else {
+                    showToast(data.error || 'Gagal menerbitkan artikel.', 'error');
+                }
+            })
+            .catch(err => {
+                console.error('Error submitting article:', err);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                showToast('Kesalahan jaringan, coba lagi.', 'error');
+            });
+        });
+
+        // Delete article helper function
+        window.deleteArticle = function(slug) {
+            const passcode = document.getElementById('passcode').value;
+            if (!passcode) {
+                showToast('Masukkan passcode keamanan admin di formulir kiri sebelum menghapus.', 'error');
+                return;
+            }
+
+            if (!confirm(`Apakah Anda yakin ingin menghapus artikel dengan slug "/${slug}"?`)) {
+                return;
+            }
+
+            fetch(getApiUrl('articles', slug), {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ passcode })
+            })
+            .then(res => res.json().then(data => ({ status: res.status, data })))
+            .then(({ status, data }) => {
+                if (status === 200) {
+                    showToast('Artikel berhasil dihapus.');
+                    loadArticles();
+                } else {
+                    showToast(data.error || 'Gagal menghapus artikel.', 'error');
+                }
+            })
+            .catch(err => {
+                console.error('Error deleting article:', err);
+                showToast('Kesalahan jaringan, coba lagi.', 'error');
+            });
+        };
+
+        // Bulletproof initialization guard in case DOMContentLoaded has already fired
+        if (document.readyState === 'loading') {
+            document.addEventListener("DOMContentLoaded", loadArticles);
+        } else {
+            loadArticles();
+        }
+    </script>
+</body>
+</html>
